@@ -12,7 +12,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static final int NUM_BULLETS=6;
     private Button[] buttons;
-    private int bulletIndex;
+    private Button bulletButton;
     private FrameLayout bangLayout;
     private TextView textBang;
     private boolean gameOver;
@@ -26,9 +26,8 @@ public class MainActivity extends AppCompatActivity {
         bangLayout=findViewById(R.id.bangLayout);
         textBang=findViewById(R.id.textViewBang);
 
-        insertBulletIntoTheBarrel();
-
         createButtons();
+        insertBulletIntoTheBarrel();
 
         assignActionReloadButton();
     }
@@ -76,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
                     if(gameOver) return;
 
                     v.setEnabled(false);
-                    if((Integer)(v.getTag())==bulletIndex){
+                    if(v==bulletButton){
                         bang();
                     }
                 }
@@ -95,7 +94,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void insertBulletIntoTheBarrel() {
-        bulletIndex=(int)(Math.random()*NUM_BULLETS);
+        int bulletIndex=(int)(Math.random()*NUM_BULLETS);
+        bulletButton=buttons[bulletIndex];
         gameOver=false;
     }
 }
